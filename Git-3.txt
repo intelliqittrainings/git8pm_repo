@@ -1,0 +1,143 @@
+Branching in Git
+======================
+This is a feature of git which allows developers to create multiple branches for each functionality and create the code related to that functionality on that branch
+This helps in creating the code in an uncluttered way
+
+1 To see the list of branches (local)
+  git branch
+
+2 To see the list of all the branches (local and remote)
+  git branch -a
+
+3 To create a branch
+  git branch branch_name
+
+4 To move into a branch
+  git checkout branch_name
+
+5 To create a branch and also move into it
+  git checkout -b branch_name
+
+7 To merge a branch
+  git merge branch_name
+
+8 To delete a branch that is merged
+  git branch -d branch_name 
+  This is also called as soft delete
+
+9 To delete a branch that is not merged
+  git branch -D branch_name
+  This is called hard delete
+
+Note: At the time of creating a branch what ever is the commit history of the parent branch will get copied into the newly created branch
+
+Note: A file can be created or modified on any branch but git will 
+consider only the branch from where it is commited 
+
+
+Working on Github
+=====================
+Github is the remote reposiotry where the code can be uploaded so that all the team members can start accessing it
+
+1 Open github.com
+2 Signup for a free account
+3 Sigin into that account
+
+Check in into github(Uploading)
+===================================
+1 Signin into github
+2 Click on + on Top right corner
+3 Click on New Repository
+4 Give some name for the repository
+5 Select Public--->Click on Create repository
+6 Go to Push an exisiting repository from comamnd line 
+7 Copy and paste the 1st command
+  This wil create a link between the local and remote repositories
+8 Copy the second command and paste it
+  git push -u origin master
+  Enter username and password of github.
+
+
+Chekout from github(Downloading)
+===================================
+This can be done in 3 ways
+1 git clone
+2 git fetch 
+3 git pull 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

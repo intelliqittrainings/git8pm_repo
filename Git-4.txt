@@ -1,0 +1,253 @@
+
+
+git clone
+=============
+This will download the entire repository into the local machine
+irrespective of whether that code is already present or not
+
+git clone remote_githu_repository_url
+
+git fetch
+===============
+This will download only the modified files and place them on a
+remote branch.We can move into thsi remote branch and check if
+the modifications are accpetable,if so merge it with the master
+
+1 Open github.com
+2 Go to the repository that we uploaded
+3 Select some file to edit--->click on Edit icon
+4 Make some changes to the file--->Click on Commit changes
+5 Open gitbash
+  git fetch
+6 The modified files will be downloaded into a remote branch
+7 To see the list of all the branches
+  git branch -a
+8 To move into the remote branch
+  git checkout remote_branch_name_from_step7
+9 View the modifed files anf if the changes are accpetable merge it master
+10 git checkout master
+   git merge remote_branch_name
+
+
+
+git pull
+==============
+This will also download only the modified files but it will directly merge
+them into the master branch
+
+1 Open github.com
+2 Go to the repository that we uploaded
+3 Select some file to edit--->click on Edit icon
+4 Make some changes to the file--->Click on Commit changes
+5 Open gitbash
+  git pull
+6 We will be able to see the modified files on the master branch
+
+===================================================================
+git merge
+Merging is done based on the time stamp of the commits
+
+1 Create few commits on master
+  touch f1
+  git add .
+  git commit -m "a"
+  touch f2
+  git add .
+  git commit -m "b"
+
+2 Check the commit history
+  git log --oneline
+
+3 Create a new branch and create few commits on it
+  git checkout -b test
+  touch f3
+  git add .
+  git commit -m "c"
+  touch f4
+  git add .
+  git commit -m "d"
+
+4 Check the commit history
+  git log --oneline
+
+
+5 Move to master and create few more commits
+  git checkout master
+  touch f5
+  git add .
+  git commit -m "e"
+  touch f6
+  git add .
+  git commit -m "f"
+
+6 Check the commit history
+  git log --oneline
+
+7 Merge test with master
+  git merge test
+
+8 Delete the test branch
+  git branch -d test
+
+9 Check the commit history
+  git log --oneline
+
+git rebase
+=================
+This  is also called as fastforward merge and the commits present in a branch will be projected as the top most commits
+
+1 Implement first 6 steps from the previous notes
+
+2 To rebase test with master
+  git checkout test
+  git rebase master
+  git checkout master
+  git merge test
+
+3 Check the commit history
+  git log --oneline
+
+
+git cherry-pick
+===================
+This feature allows us to selectively pick only few commits and add
+them to the master branch
+
+1 Create a commit on master
+  touch f1
+  git add .
+  git commit -m "a"
+
+2 Create a test branch and create few commits on it
+  touch f2
+  git add .
+  git commit -m "b"
+  touch f3
+  git add .
+  git commit -m "c"
+  touch f4
+  git add .
+  git commit -m "d"
+  touch f5
+  git add .
+  git commit -m "e"
+
+3 Check the commit history
+  git log --oneline
+
+4 To cherrypick only few commits from test to master
+  git checkout master
+  git cherry-pick commit_id1 commit_id2 (from step 3)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
