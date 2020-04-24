@@ -1,0 +1,170 @@
+#Redismaster-controller.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  replicas: 3
+  selector:
+    name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        ports:
+        - containerPort: 80
+======================================================================
+frontend-controller.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  replicas: 3
+  selector:
+    name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access environment variables to find service host
+          # info, comment out the 'value: dns' line above, and uncomment the
+          # line below.
+          # value: env
+        ports:
+        - containerPort: 80
+
+===========================================================================
+fronend-service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    name: frontend
+spec:
+  # if your cluster supports it, uncomment the following to automatically create
+  # an external load-balanced IP for the frontend service.
+  # type: LoadBalancer
+  type: NodePort
+  ports:
+    # the port that this service should serve on
+    - port: 80
+      nodePort: 30080
+  selector:
+    name: frontend
+
+==========================================================================
+vim redis-master-controller.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: redis-master
+  labels:
+    name: redis-master
+spec:
+  replicas: 1
+  selector:
+    name: redis-master
+  template:
+    metadata:
+      labels:
+        name: redis-master
+    spec:
+      containers:
+      - name: master
+        image: redis:3.0.7-alpine
+        ports:
+        - containerPort: 6379
+=====================================================================
+redis-master.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-master
+  labels:
+    name: redis-master
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 6379
+    targetPort: 6379
+  selector:
+    name: redis-master
+
+==========================================================================
+redis-slave.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: redis-slave
+  labels:
+    name: redis-slave
+spec:
+  replicas: 2
+  selector:
+    name: redis-slave
+  template:
+    metadata:
+      labels:
+        name: redis-slave
+    spec:
+      containers:
+      - name: worker
+        image: gcr.io/google_samples/gb-redisslave:v1
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+          # If your cluster config does not include a dns service, then to
+          # instead access an environment variable to find the master
+          # service's host, comment out the 'value: dns' line above, and
+          # uncomment the line below.
+          # value: env
+        ports:
+        - containerPort: 6379
+
+==============================================================================
+redis-service.yml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-slave
+  labels:
+    name: redis-slave
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 6379
+  selector:
+    name: redis-slave
+
